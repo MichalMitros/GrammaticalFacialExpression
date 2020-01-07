@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Other extentions
-.dat
+*.dat
 
 # C extensions
 *.so
