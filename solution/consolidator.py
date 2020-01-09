@@ -17,7 +17,7 @@ def read_file(f):
         print(content)
 
 
-for dirpath, dnames, fnames in os.walk("../../data/"):
+for dirpath, dnames, fnames in os.walk("../data/"):
     for f in fnames:
         abspath = os.path.join(dirpath, f)
         with open(abspath) as f:
