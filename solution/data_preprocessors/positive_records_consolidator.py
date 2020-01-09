@@ -10,11 +10,12 @@ import os
 
 file_count = 0
 
+
 def read_file(f):
     if f.mode == 'r':
         content = f.read()
         print(content)
-    
+
 
 for dirpath, dnames, fnames in os.walk("../../data/"):
     for f in fnames:
