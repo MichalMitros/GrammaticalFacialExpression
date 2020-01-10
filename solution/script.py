@@ -1,5 +1,5 @@
 # NEURAL NETWORK TEST (XOR example)
-from neural_network import NeuralNetwork
+from solution.neural_network import NeuralNetwork
 from random import shuffle
 
 # Training data

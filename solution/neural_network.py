@@ -9,9 +9,9 @@ def sigmoid(x, deriv=False):
 
 class NeuralNetwork:
 
-    def __init__(self, inputs, hidden, outputs, learning_rate=0.05, activation=sigmoid):
-        # temporary for debug porpoises
-        np.random.seed(1)
+    def __init__(self, inputs, hidden, outputs, learning_rate=0.05, activation=sigmoid, random_seed=None):
+        if random_seed:
+            np.random.seed(random_seed)
         # set network parameters
         self.inputs = inputs
         self.hidden = hidden
