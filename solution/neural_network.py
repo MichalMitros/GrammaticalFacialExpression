@@ -2,6 +2,13 @@ import numpy as np
 
 
 def sigmoid(x, deriv=False):
+    """
+    Sigmoid function
+    :param x: argument of function
+    :param deriv: boolean if result should be derivative of sigmoid (False by default)
+    :return: Result of sigmoid function or result of sigmoid function's derivative
+    """
+
     if deriv:
         return x * (1 - x)
     return 1 / (1 + np.exp(-x))
@@ -10,6 +17,16 @@ def sigmoid(x, deriv=False):
 class NeuralNetwork:
 
     def __init__(self, inputs, hidden, outputs, learning_rate=0.05, activation=sigmoid, random_seed=None):
+        """
+        Constructs neural network with random weights and biases (values from -1 to 1)
+        :param inputs: number of inputs of neural network
+        :param hidden: number of neurons in hidden layer
+        :param outputs: number of outputs (neurons in output layer)
+        :param learning_rate: learning rate of neural network (0.05 by default)
+        :param activation: global activation function for this neural network (sigmoid by default)
+        :param random_seed: seed for generating random weights and biases for debug/testing purposes (None by default)
+        """
+
         if random_seed:
             np.random.seed(random_seed)
         # set network parameters
@@ -26,6 +43,13 @@ class NeuralNetwork:
         self.output_biases = 2 * np.random.rand(outputs) - 1
 
     def feed_forward(self, input_array):
+        """
+        Getting result for input from the neural network
+        :param input_array: array of inputs to get the results from
+        :return: array of outputs from neural network
+
+        """
+
         # Calculate hidden layer's output
         hidden = np.dot(self.hidden_weights, input_array)
         hidden = hidden + self.hidden_biases
@@ -41,6 +65,14 @@ class NeuralNetwork:
 
     # Choo choo!
     def train(self, input_array, target_array):
+        """
+        Executing single training step in the neural network
+        :param input_array: array of inputs used o train neural network
+        :param target_array: array of expected, correct answers
+        :return: MSE (Mean-Square-Error) for this input before training step (Float)
+
+        """
+
         # FEED FORWARD ALGORITHM:
         # Calculate hidden layer's output
         hidden = np.dot(self.hidden_weights, input_array)
@@ -81,4 +113,4 @@ class NeuralNetwork:
         self.hidden_weights = self.hidden_weights + hidden_deltas
         self.hidden_biases = self.hidden_biases + hidden_gradients
 
-        return (1./2.*len(target_array))*np.sum(np.square(output_errors))
+        return (1./self.inputs)*np.sum(np.square(output_errors))
