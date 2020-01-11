@@ -7,6 +7,9 @@ import os
 
 '''
 
+'''
+    Consolidating data into one file
+'''
 for dirpath, dnames, fnames in os.walk("../data/"):
     with open("../preprocessed_data/datafile_v1.txt", "w") as datafile:
         for i in range(0, len(fnames), 2):
@@ -22,7 +25,9 @@ for dirpath, dnames, fnames in os.walk("../data/"):
                             else:
                                 datafile.write(" ".join(line.split()[1:]) + " -1\n")
 
-
+'''
+    Deleting unlabeled records
+'''
 with open("../preprocessed_data/datafile_v1.txt") as datafile_v1:
     with open("../preprocessed_data/datafile_v2.txt", "w") as datafile_v2:
         for line in datafile_v1:
