@@ -5,8 +5,14 @@ def normalize_data(data):
     """
     Min-max normalization
     """
-    data_min, data_max = data.min(), data.max()
-    return (data - data_min) / (data_max - data_min)
+    for i in range(np.size(data, 1)):
+        data[:, i] = normalize_column(data[:, i])
+    return data
+
+
+def normalize_column(column):
+    column_min, column_max = column.min(), column.max()
+    return (column - column_min) / (column_max - column_min)
 
 
 def load_data(path):
