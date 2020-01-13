@@ -23,7 +23,7 @@ class TestNeuralNetwork(unittest.TestCase):
         random.seed(1)
         data = [
             [0, 0, 0],
-            [0, 1, 1],
+            [0 , 1, 1],
             [1, 0, 1],
             [1, 1, 0]
         ]

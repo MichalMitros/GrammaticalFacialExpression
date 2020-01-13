@@ -7,6 +7,7 @@ def sigmoid(x, deriv=False):
     :param x: argument of function
     :param deriv: boolean if result should be derivative of sigmoid (False by default)
     :return: Result of sigmoid function or result of sigmoid function's derivative
+
     """
 
     if deriv:
@@ -25,6 +26,7 @@ class NeuralNetwork:
         :param learning_rate: learning rate of neural network (0.05 by default)
         :param activation: global activation function for this neural network (sigmoid by default)
         :param random_seed: seed for generating random weights and biases for debug/testing purposes (None by default)
+
         """
 
         if random_seed:
