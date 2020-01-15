@@ -6,6 +6,11 @@ __pycache__/
 # Other
 preprocessed_data/datafile*
 
+# LaTeX
+*.aux
+*.synctex.gz
+*.log
+
 # C extensions
 *.so
 
