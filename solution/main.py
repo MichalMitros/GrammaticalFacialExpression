@@ -22,13 +22,16 @@ delete_unlabeled_records()
 print('Loading data...')
 data = load_data('../preprocessed_data/datafile_v2.txt')
 data = split_data(data, 0.8)
-nn = NeuralNetwork(len(data[0][0]), 150, 9)
+nn = NeuralNetwork(len(data[0][0]), 150, 30, 9, learning_rate=0.01)
 target_array = [0] * 9
+
 accuracy = 0
 epoch = 0
+max_epoch = 20
+min_accuracy = 0.98
 
 print('Learning started...')
-while accuracy <= 0.9:
+while accuracy <= min_accuracy and epoch < max_epoch:
     accuracy = 0.
     epoch = epoch + 1
 
@@ -49,5 +52,7 @@ while accuracy <= 0.9:
 
     print('Epoch: {}\tAccuracy: {}%'.format(epoch, floor(accuracy*100)))
 
-print('Learning finished')
-
+if epoch is not max_epoch:
+    print('Learning finished. Final accuracy: {}'.format(accuracy))
+else:
+    print('Learning finished. Target accuracy not reached!')
