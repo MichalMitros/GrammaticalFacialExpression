@@ -1,1 +1,1 @@
-Directory for unit tests
+Directory for tests
