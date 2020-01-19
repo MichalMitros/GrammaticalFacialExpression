@@ -22,8 +22,8 @@ delete_unlabeled_records()
 print('Loading data...')
 data = load_data('../preprocessed_data/datafile_v2.txt')
 data = split_data(data, 0.8)
-nn = NeuralNetwork(len(data[0][0]), 3*len(data[0][0]), 18)
-target_array = [0] * 18
+nn = NeuralNetwork(len(data[0][0]), 150, 9)
+target_array = [0] * 9
 accuracy = 0
 epoch = 0
 
