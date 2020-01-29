@@ -16,6 +16,10 @@ def consolidate_files(src_dir="../data/", output_file="../preprocessed_data/data
         a_targets = glob.glob("../data/a*targets.txt")
         b_datapoints = glob.glob("../data/b*datapoints.txt")
         b_targets = glob.glob("../data/b*targets.txt")
+        a_datapoints.sort()
+        a_targets.sort()
+        b_datapoints.sort()
+        b_targets.sort()
         for i in range(len(a_datapoints)):
             with open(a_datapoints[i]) as datapoints:
                 with open(a_targets[i]) as targets:
