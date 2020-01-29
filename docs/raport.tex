@@ -47,18 +47,27 @@ Współrzędne X i Y mierzone są w pikselach i odpowiadają pikselowi na nagran
 	\\\small Dokładność w kolejnych epokach uczenia
 \end{center}
 
-\hspace{1cm}Problem musi więc tkwić we wstępnym przetwarzaniu danych. Pojawił się błąd w interpretacji klas w danych źródłowych. Dostarczony opis problemu wskazywał na 18 klas decyzyjnych. Było to spowodowane faktem, że w danych rozróżniono wyraźnie skany osoby 'a' i osoby 'b', nawet, jeżeli osoby te wykonywały ten sam gest. Oznaczało to, że aby osiągnąć docelową dokładność, klasyfikator oprócz rozpoznawania gestów musiałby rozpoznawać osobę. Ilość klas została zredukowana do właściwej ilości, co znacząco poprawiło wyniki uczenia. Dodatkowo udało się wyznaczyć lepsze parametry sieci - lepszy współczynnik uczenia i mniejsza liczba neuronów w warstwie ukrytej (150).
+\hspace{1cm}Problem musi więc tkwić we wstępnym przetwarzaniu danych. Pojawił się błąd w interpretacji klas w danych źródłowych. Dostarczony opis problemu wskazywał na 18 klas decyzyjnych. Było to spowodowane faktem, że w danych rozróżniono wyraźnie skany osoby 'a' i osoby 'b', nawet, jeżeli osoby te wykonywały ten sam gest. Oznaczało to, że aby osiągnąć docelową dokładność, klasyfikator oprócz rozpoznawania gestów musiałby rozpoznawać osobę. Uczenie zostało uruchomione jedynie dla danych pochodzących od osoby 'a', co znacząco poprawiło wyniki uczenia. Dodatkowo udało się wyznaczyć lepsze parametry sieci - lepszy współczynnik uczenia i mniejsza liczba neuronów w warstwie ukrytej (150).
 
 \begin{center}
 	\includegraphics[scale=0.25]{accuracy2.png}
 	\\\small Dokładność w kolejnych epokach uczenia
 \end{center}
 
-\hspace{1cm}Oprócz wzrostu dokładności, zmalała też ilość epok uczenia potrzebnych do jej osiągnięcia. Dokładność 90\% jest już zadowalającym wynikiem i jest osiągana średnio w ciągu 8 epok. Zaimplementowano już wersję klasyfikatora z dwiema warstwami ukrytymi, ale nie przeprowadzono jeszcze testów na tych danych. Spodziewamy się dodatkowego poprawienia wyników.
+\hspace{1cm}Oprócz wzrostu dokładności, zmalała też ilość epok uczenia potrzebnych do jej osiągnięcia. Dokładność 90\% jest już zadowalającym wynikiem i jest osiągana średnio w ciągu 8 epok. Zaimplementowano już wersję klasyfikatora z dwiema warstwami ukrytymi, ale nie przeprowadzono jeszcze testów na tych danych. Spodziewamy się dodatkowego poprawienia wyników. Nie wiadomo też, jak zmieni się uczenie po faktycznej redukcji klas, bez pomijania danych pochodzących od osoby 'b'.
+
+\begin{center}
+	\includegraphics[scale=0.4]{accuracy3.png}
+	\\\small Dokładność w kolejnych epokach uczenia
+\end{center}
+
+\hspace{1cm}Powyższy wykres został utworzony po wprowadzeniu drugiej warstwy sieci, scaleniu przypadków 'a' i 'b' oraz po optymalizacji wstępnego przetwarzania danych. Widać znaczące wydłużenie uczenia, wykres zachowuje jednak charakterystyczną formę krzywej uczenia.
 
 \section{Komentarze i wnioski}
-\hspace{1cm}W pierwszej wersji udało się utworzyć klasyfikator zdolny do uczenia, niestety drobne niedociągnięcia i przeoczenia spowodowały brak wysokich wyników. Problem zidentyfikowano i rozwiązano, co pozwoliło osiągnąć klasyfikację o dokładności dochodzącej do 90\%.\\
-\hspace{1cm}Największym problemem napotkanym podczas pierwszych etapów badań był jednak brak jednoznacznej interpretacji rekordów nie mających etykiet w plikach wejściowych. Ostatecznie zostały one pominięte w podstawowej klasyfikacji i trafiły na listę potencjalnych eksperymentów do wykonania po zrealizowaniu podstawy projektu. Płynie z tego wniosek, że podczas tworzenia zbiorów danych rozbitych na pojedyncze pliki należy pamiętać o właściwym oznaczaniu etykiet, aby nie doszło do niejednoznaczności.\\
-\hspace{1cm}Obecne wyniki zostały osiągnięte bez finalnej wersji modelu klasyfikatora. Przy tak takiej ilości danych wejściowych sieci, dodatkowa warstwa ukryta może poprawić wyniki. W kolejnej wersji raportu spodziewamy się poprawionych wyników. Dodatkowo do zaimplementowania został mechanizm importu/eksportu wyuczonego modelu do/z pliku, ale przez fakt, że uczenie nie trwa długo, nie jest to zadanie o wysokim priorytecie.
+\hspace{1cm}W pierwszej wersji udało się utworzyć klasyfikator zdolny do uczenia, niestety drobne niedociągnięcia i przeoczenia spowodowały brak wysokich wyników. Problem zidentyfikowano i rozwiązano, co pozwoliło osiągnąć klasyfikację o dokładności dochodzącej do 90\%. Różnica w ilości epok po redukcji klas wskazuje na dwie opcje:\\
+1. Druga warstwa sieci została zaimplementowana niepoprawnie, co zmusiło warstwę pierwszą do dodatkowego redukowania błędu i wydłużyło czas uczenia (mało prawdopodobne - na modelu z dwiema warstwami ukrytymi przeprowadzono testy na innych problemach klasyfikacji i w każdym przypadku doszło do przyspieszenia uczenia od 2 do 5 krotnie)\\
+2. Poprzednie próby uczenia były z góry niepoprawne przez niewłaściwą interpretację danych wejściowych - szybko dochodziło do przetrenowania modelu podczas uczenia na danych pochodzących od jednej osoby. Wskazywało by to na to, że sieć neuronowa rzeczywiście potrzebuje dłuższego uczenia, aby osiągnąć wymaganą dokładność.\\
+Dokładność 90\% nie jest bardzo wysokim wynikiem, ale jest już satysfakcjonująca, jeżeli uwzględnimy fakt, że dane uczące utworzone zostały na podstawie skanów pobranych od tylko dwóch osób. Po dokładnym przeanalizowaniu danych można też dojść do wniosku, że dane przystosowane są do klasyfikacji jako nagranie, a nie pojedyncze klatki - należało by użyć do tego bardziej zaawansowanego modelu sieci i znacznie bardziej skomplikowanego procesu uczenia.\\\\
+\hspace{1cm}Największym problemem napotkanym podczas pierwszych etapów badań był jednak brak jednoznacznej interpretacji rekordów nie mających etykiet w plikach wejściowych. Płynie z tego wniosek, że podczas tworzenia zbiorów danych rozbitych na pojedyncze pliki należy pamiętać o właściwym oznaczaniu etykiet, aby nie doszło do niejednoznaczności.
 
 \end{document}
